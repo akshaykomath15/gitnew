@@ -13,10 +13,9 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image and tag it
-                    def dockerImage = docker.build('akshaykomath/node-webapp:v1')
+                    sh 'docker buildx build -t akshaykomath/node-webapp:v1 .'
                     
-                    // Optionally, store the image name if needed for later stages
-                    env.DOCKER_IMAGE = dockerImage.imageName
+                    // Note: No need to store dockerImage in environment variable
                 }
             }
         }
@@ -25,12 +24,8 @@ pipeline {
                 script {
                     // Authenticate with Docker Hub
                     docker.withRegistry('https://registry.hub.docker.com', 'DOCKERHUB_CREDENTIALS') {
-                        // Use the previously built Docker image
-                        def dockerImage = docker.image(env.DOCKER_IMAGE)
-                        
-                        // Push the Docker image with tags
-                        dockerImage.push('latest')  // Optionally specify tags like 'latest'
-                        dockerImage.push('v1')      // Push the versioned tag
+                        // Use the Docker command to push the image directly
+                        sh 'docker push akshaykomath/node-webapp:v1'
                     }
                 }
             }
