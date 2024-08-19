@@ -13,13 +13,7 @@ pipeline {
                 git url: 'https://github.com/akshaykomath15/gitnew.git', branch: 'main'
             }
         }
-        stages{
-        stage('Maven Install'){
-                      agent any
-                      steps{
-                          bat 'mvn -f pom.xml clean install'
-                      }
-                  }
+      
         stage('Build Docker Image') {
             steps {
                 script {
