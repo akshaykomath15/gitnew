@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image and tag it
-                    sh 'docker  build -t akshaykomath/node-webapp1:v1 .'
+                    sh 'docker  build -t akshaykomath/node-webapp1:latest .'
                     
                     // Note: No need to store dockerImage in environment variable
                 }
@@ -25,7 +25,7 @@ pipeline {
                     // Authenticate with Docker Hub
                     docker.withRegistry('https://registry.hub.docker.com', 'DOCKERHUB_CREDENTIALS') {
                         // Use the Docker command to push the image directly
-                        sh 'docker push akshaykomath/node-webapp1:v1'
+                        sh 'docker push akshaykomath/node-webapp1:latest'
                     }
                 }
             }
