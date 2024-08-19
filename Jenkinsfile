@@ -3,6 +3,9 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('DOCKERHUB_CREDENTIALS')
     }
+    parameters {
+        string(name: 'IMAGE_TAG', defaultValue: 'latest', description: 'Tag for the Docker image')
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -12,20 +15,20 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build the Docker image and tag it
-                    sh 'docker  build -t akshaykomath/node-webapp1:latest .'
-                    
-                    // Note: No need to store dockerImage in environment variable
+                    // Use the IMAGE_TAG parameter to tag the Docker image
+                    def imageTag = params.IMAGE_TAG
+                    sh "docker build -t akshaykomath/node-webapp1:${imageTag} ."
                 }
             }
         }
         stage('Push Docker Image') {
             steps {
                 script {
+                    def imageTag = params.IMAGE_TAG
                     // Authenticate with Docker Hub
                     docker.withRegistry('https://registry.hub.docker.com', 'DOCKERHUB_CREDENTIALS') {
-                        // Use the Docker command to push the image directly
-                        sh 'docker push akshaykomath/node-webapp1:latest'
+                        // Use the Docker command to push the image with the specified tag
+                        sh "docker push akshaykomath/node-webapp1:${imageTag}"
                     }
                 }
             }
