@@ -18,7 +18,7 @@ pipeline {
                 script {
                     def imageTag = params.IMAGE_TAG
                     echo "Building Docker image with tag: ${imageTag}"
-                    sh "docker build -t akshaykomath/node-webapp1:${imageTag} ."
+                     bat "docker build -t akshaykomath/node-webapp1:${imageTag} ."
                 }
             }
         }
