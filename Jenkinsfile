@@ -1,15 +1,6 @@
 pipeline {
     agent any
-    stage('Check Environment Variables') {
-            steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: '5708d687-8960-4e7e-856c-e53a7724aabb', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                        sh 'echo "Docker Username: $DOCKER_USERNAME"'
-                        sh 'echo "Docker Password: $DOCKER_PASSWORD"'
-                    }
-                }
-            }
-        }
+   
     environment {
         DOCKERHUB_CREDENTIALS = credentials('id-1')
     }
@@ -25,8 +16,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Use the IMAGE_TAG parameter to tag the Docker image
                     def imageTag = params.IMAGE_TAG
+                    echo "Building Docker image with tag: ${imageTag}"
                     sh "docker build -t akshaykomath/node-webapp1:${imageTag} ."
                 }
             }
@@ -35,10 +26,9 @@ pipeline {
             steps {
                 script {
                     def imageTag = params.IMAGE_TAG
-                    // Authenticate with Docker Hub
+                    echo "Pushing Docker image with tag: ${imageTag}"
+                    
                     docker.withRegistry('https://registry.hub.docker.com', 'id-1') {
-                        // Use the Docker command to push the image with the specified tag
-                        sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
                         sh "docker push akshaykomath/node-webapp1:${imageTag}"
                     }
                 }
