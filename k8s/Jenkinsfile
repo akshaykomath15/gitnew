@@ -1,36 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('pipeline {
-    agent any
-    environment {
         DOCKERHUB_CREDENTIALS = credentials('5708d687-8960-4e7e-856c-e53a7724aabb')
-    }
-    stages {
-        stage('Checkout') {
-            steps {
-                git url: 'https://github.com/akshaykomath15/gitnew.git', branch: 'main'
-            }
-        }
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    dockerImage = docker.build("akshaykomath/node-webapp:v1")
-                }
-            }
-        }
-        stage('Push Docker Image') {
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'DOCKERHUB_CREDENTIALS') {
-                        dockerImage.push()
-                    }
-                }
-            }
-        }
-    }
-}
-')
     }
     stages {
         stage('Checkout') {
