@@ -1,5 +1,15 @@
 pipeline {
     agent any
+    stage('Check Environment Variables') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: '5708d687-8960-4e7e-856c-e53a7724aabb', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                        sh 'echo "Docker Username: $DOCKER_USERNAME"'
+                        sh 'echo "Docker Password: $DOCKER_PASSWORD"'
+                    }
+                }
+            }
+        }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('id-1')
     }
