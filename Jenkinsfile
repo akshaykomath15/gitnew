@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('DOCKERHUB_CREDENTIALS')
+        DOCKERHUB_CREDENTIALS = credentials('id-1')
     }
     parameters {
         string(name: 'IMAGE_TAG', defaultValue: 'latest', description: 'Tag for the Docker image')
@@ -26,7 +26,7 @@ pipeline {
                 script {
                     def imageTag = params.IMAGE_TAG
                     // Authenticate with Docker Hub
-                    docker.withRegistry('https://registry.hub.docker.com', 'DOCKERHUB_CREDENTIALS') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'id-1') {
                         // Use the Docker command to push the image with the specified tag
                         sh "docker push akshaykomath/node-webapp1:${imageTag}"
                     }
