@@ -28,7 +28,7 @@ pipeline {
                     // Authenticate with Docker Hub
                     docker.withRegistry('https://registry.hub.docker.com', 'id-1') {
                         // Use the Docker command to push the image with the specified tag
-                        sh "docker push akshaykomath/node-webapp1:${imageTag}"
+                        sh "docker push -verbose  akshaykomath/node-webapp1:${imageTag}"
                     }
                 }
             }
