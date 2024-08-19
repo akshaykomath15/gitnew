@@ -12,7 +12,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("akshaykomath/node-webapp:v1")
+                sh 'docker build -t akshaykomath/node-webapp:v1 -f k8s/Dockerfile .'
+
                 }
             }
         }
