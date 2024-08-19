@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image and tag it
-                    sh 'docker buildx build -t akshaykomath/node-webapp1:v1 .'
+                    sh 'docker  build -t akshaykomath/node-webapp1:v1 .'
                     
                     // Note: No need to store dockerImage in environment variable
                 }
