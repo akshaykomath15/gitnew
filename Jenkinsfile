@@ -12,8 +12,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-               sh 'docker buildx build -t akshaykomath/node-webapp:v1'
- 
+                
+                sh 'docker buildx build -t akshaykomath/node-webapp:v1 .'
                 }
             }
         }
