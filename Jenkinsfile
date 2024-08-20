@@ -21,7 +21,7 @@ pipeline {
                 script {
                     def imageTag = params.IMAGE_TAG
                     echo "Building Docker image with tag: ${imageTag}"
-                    sh "docker build -t akshaykomath/node-webapp1:${imageTag} ."
+                    sh "docker build -t akshaykomath1/node-webapp:${imageTag} ."
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
 
                     // Authenticate and push Docker image
                     docker.withRegistry('https://registry.hub.docker.com', 'id-1') {
-                        sh "docker push akshaykomath/node-webapp1:${imageTag}"
+                        sh "docker push akshaykomath1/node-webapp:${imageTag}"
                     }
                 }
             }
