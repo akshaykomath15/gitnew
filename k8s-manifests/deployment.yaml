@@ -1,19 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: node-webapp
+  name: test-webapp-deployment
+  labels:
+    app: test-webapp
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: node-webapp
+      app: test-webapp
   template:
     metadata:
       labels:
-        app: node-webapp
+        app: test-webapp
     spec:
       containers:
-      - name: node-webapp
+      - name: test-webapp
         image: akshaykomath1/test-webapp:latest
         ports:
-        - containerPort: 3000
+        - containerPort: 80
