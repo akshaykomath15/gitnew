@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: test-webapp
-        image: akshaykomath1/test-webapp:latest
+        image: akshaykomath1/test-webapp:new
         ports:
         - containerPort: 80
