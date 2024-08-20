@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('id-1') // Ensure this credential ID matches what you've set in Jenkins
+        DOCKERHUB_CREDENTIALS = credentials('id-1') // Replace 'id-1' with your actual credentials ID
     }
 
     parameters {
@@ -21,7 +21,7 @@ pipeline {
                 script {
                     def imageTag = params.IMAGE_TAG
                     echo "Building Docker image with tag: ${imageTag}"
-                    sh "docker build -t akshaykomath1/node-webapp:${imageTag} ."
+                    sh "docker build -t akshaykomath1/test-webapp:${imageTag} ."  // Note the change here to test-webapp
                 }
             }
         }
@@ -33,8 +33,8 @@ pipeline {
                     echo "Pushing Docker image with tag: ${imageTag}"
 
                     // Authenticate and push Docker image
-                    docker.withRegistry('https://registry.hub.docker.com', 'id-1') {
-                        sh "docker push akshaykomath1/node-webapp:${imageTag}"
+                    docker.withRegistry('https://index.docker.io/v1/', 'DOCKERHUB_CREDENTIALS') {
+                        sh "docker push akshaykomath1/test-webapp:${imageTag}"  // Note the change here to test-webapp
                     }
                 }
             }
