@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: test-webapp
-        image: akshaykomath1/test-webapp:new
+        image: akshaykomath1/test-webapp:neww
         ports:
         - containerPort: 80
       imagePullSecrets:
