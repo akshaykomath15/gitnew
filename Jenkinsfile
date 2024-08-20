@@ -33,7 +33,7 @@ pipeline {
                     echo "Pushing Docker image with tag: ${imageTag}"
 
                     // Authenticate and push Docker image
-                    docker.withRegistry('https://index.docker.io/v1/', 'DOCKERHUB_CREDENTIALS') {
+                    docker.withRegistry('https://index.docker.io/v1/', 'id-1') {
                         sh "docker push akshaykomath1/test-webapp:${imageTag}"  // Note the change here to test-webapp
                     }
                 }
