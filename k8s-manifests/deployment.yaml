@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: node-webapp
-        image: akshaykomath/node-webapp:latest
+        image: akshaykomath1/test-webapp:latest
         ports:
         - containerPort: 3000
